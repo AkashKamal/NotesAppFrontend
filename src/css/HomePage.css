@@ -1,0 +1,90 @@
+.totalLayout{
+  display: flex;
+}
+
+.sidelayout {
+flex: 15%;
+height: 100vh;
+background-color: #2F4050;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sideBar {
+    height: 100%;
+    width: 100%;
+    
+  }
+
+.sideBarList {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.sideBarList .row{
+  width: 100%;
+  height: 60px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.sideBarList .row:hover{
+  cursor: pointer;
+  background-color: #293846;
+}
+
+.sideBarList #active{
+  background-color: #293846;
+}
+
+.row #icon{
+  flex: 30%;
+  display: grid;
+  place-items: center;
+}
+.row #title{
+  flex: 70%;
+}
+.mainLayout{
+  display: flex;
+  flex-direction: column;
+  flex: 85%;
+  background: white;
+}
+
+
+ .header {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: #2F4050;
+}
+
+.header .logoutButton{
+position: absolute;
+right: 0;
+margin-top: 10px;
+}
+
+.header input[type=text] {
+  position: absolute;
+  left: 0;
+  width: 500px;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-left: 16px;
+  font-size: 17px;
+}
+
+  
