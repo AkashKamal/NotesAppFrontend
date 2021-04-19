@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useHistory,Redirect } from "react-router-dom";
 
 class AuthService{
 

@@ -67,14 +67,9 @@ body {
   position: relative;
   width: 100%;
   height: 50px;
-  background-color: #2F4050;
+  background-color: #1b2b38;
 }
 
-.header .logoutButton{
-position: absolute;
-right: 0;
-margin-top: 10px;
-}
 
 .header input[type=text] {
   position: absolute;
@@ -86,5 +81,35 @@ margin-top: 10px;
   margin-left: 16px;
   font-size: 17px;
 }
+
+.common-button{
+  background-color: #293846; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  margin: 15px;
+}
+
+.header-button{
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  margin: 15px;
+  position: absolute;
+right: 0;
+margin-top: 10px;
+}
+
 
   

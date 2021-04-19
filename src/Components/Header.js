@@ -16,7 +16,7 @@ function Header() {
         <>
             <div className="header">
                 <input type="text" placeholder="Search.."></input>
-                <button className="logoutButton" onClick={() => logout()}>Logout</button>
+                <button className="header-button" onClick={() => logout()}>Logout</button>
             </div>
         </>
     )
