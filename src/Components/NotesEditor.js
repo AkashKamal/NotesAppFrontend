@@ -11,12 +11,14 @@ function NotesEditor({open,notesDetails,onClose}) {
         const title = document.getElementById('editor-title').textContent;
         notesDetails.title = title;
         notesDetails.content = content;
-        axios.post(`http://localhost:8080/api/v1/updateNote`, notesDetails, {
+        const url = (typeof notesDetails.id != 'undefined') ? `http://localhost:8080/api/v1/updateNote` : `http://localhost:8080/api/v1/addNote`
+        axios.post(url, notesDetails, {
             headers: {
                 crossdomain: true
             }
         }).then(res => {
-            return "success"
+            console.log(res);
+            onClose();
         });
     }
 
