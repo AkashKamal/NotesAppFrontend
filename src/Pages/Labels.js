@@ -3,7 +3,6 @@ import React from 'react'
 function Labels() {
     return (
         <div>
-            {console.log("ef")}
             Labels
         </div>
     )

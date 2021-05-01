@@ -10,6 +10,7 @@ function AuthInterceptor() {
       console.log(accessToken);
       if (accessToken) {
         config.headers["Authorization"] = accessToken;
+        config.headers["Access-Control-Allow-Origin"]= "*"
       }
       return config;
     },

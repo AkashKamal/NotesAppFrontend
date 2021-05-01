@@ -1,5 +1,5 @@
 import React from 'react'
-import "../css/Notes.css"
+import "../css/NotesEditor.css"
 import ReactDom from "react-dom"
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ function NotesEditor({open,notesDetails,onClose}) {
                 crossdomain: true
             }
         }).then(res => {
-            console.log(res);
+           if(res.status)
             onClose();
         });
     }

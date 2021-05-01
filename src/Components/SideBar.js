@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import "../css/HomePage.css"
-import { CgNotes} from "react-icons/cg";
-import { BiLabel} from "react-icons/bi";
+import { CgNotes } from "react-icons/cg";
+import { BiLabel } from "react-icons/bi";
+import { BsTrash } from "react-icons/bs";
+import { GrFavorite } from "react-icons/gr";
 
 export default function SideBar() {
 
@@ -10,21 +12,31 @@ export default function SideBar() {
         {
             name: "Notes",
             route: "/notes",
-            icon: <CgNotes/>
+            icon: <CgNotes />
         },
         {
             name: "Labels",
             route: "/labels",
-            icon: <BiLabel/>
+            icon: <BiLabel />
+        },
+        {
+            name: "Favorite",
+            route: "/",
+            icon: <GrFavorite />
+        },
+        {
+            name: "Trash",
+            route: "/",
+            icon: <BsTrash />
         }
     ]
     const [activeItem, setActiveItem] = useState(0);
-    
+
     useEffect(() => {
     }, [activeItem])
 
     const history = useHistory();
-    const handleClick = (url,index) => {
+    const handleClick = (url, index) => {
         history.push(url);
         setActiveItem(index);
         console.log(index);
@@ -33,13 +45,14 @@ export default function SideBar() {
     return (
         <>
             <div className="sideBar">
+                <h1 className="row">Logo</h1>
                 <ul className="sideBarList">
-                    <h1 className="row">Logo</h1>
+
                     {
-                        sideBarItems.map((item,index) => (
+                        sideBarItems.map((item, index) => (
                             <li key={index} className="row"
                                 id={index == activeItem ? "active" : "test"}
-                                onClick={() => handleClick(item.route,index)}>
+                                onClick={() => handleClick(item.route, index)}>
                                 <div id="icon">{item.icon}</div>
                                 <div id="title">{item.name}</div>
                             </li>

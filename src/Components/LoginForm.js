@@ -3,6 +3,7 @@ import AuthService from '../Services/AuthService'
 import { BrowserRouter as Router} from "react-router-dom"
 import "../css/LoginPage.css"
 import history from "./History"
+import "../index.css"
 
 export default function LoginForm(){
 
@@ -15,14 +16,18 @@ export default function LoginForm(){
             document.getElementById("errorMessage").innerHTML = "Please fill the details";
             return;
         }
-        if(AuthService.login(details)){
-            console.log("test");
-            history.push("/");
-        }
-        else{
-            document.getElementById("errorMessage").innerHTML = "Invalid credentials";
-        }
-       
+        const authResponse = AuthService.login(details);
+        authResponse.then(
+            function(value){
+                if(value.status == "success"){
+                    history.push("/");
+                }
+                else{
+                    console.log(authResponse);
+                    document.getElementById("errorMessage").innerHTML = value.errorMessage;
+                }
+            }
+        )
     }
     return(
         <>

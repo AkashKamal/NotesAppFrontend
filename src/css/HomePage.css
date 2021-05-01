@@ -1,11 +1,14 @@
 .totalLayout{
   display: flex;
+  color: bl;
 }
 
 .sidelayout {
 flex: 15%;
 height: 100vh;
-background-color: #2F4050;
+color: black;
+background-color: #f6f7f8;
+border-right: 1px solid #efefef;
 }
 
 
@@ -20,6 +23,10 @@ body {
     
   }
 
+.sideBar h1{
+  text-align: center;
+}
+
 .sideBarList {
   height: auto;
   padding: 0;
@@ -33,18 +40,20 @@ body {
   margin: 0;
   display: flex;
   flex-direction: row;
-  color: white;
+  color: black;
   justify-content: center;
   align-items: center;
 }
 
 .sideBarList .row:hover{
   cursor: pointer;
-  background-color: #293846;
+  background-color: #1d8ccc;
+  color : white;
 }
 
 .sideBarList #active{
-  background-color: #293846;
+  background-color: #2fa6ea;
+  color : white;
 }
 
 .row #icon{
@@ -67,7 +76,8 @@ body {
   position: relative;
   width: 100%;
   height: 50px;
-  background-color: #1b2b38;
+  background-color: #f6f7f8;
+  border: 1px solid #efefef;
 }
 
 
@@ -76,14 +86,15 @@ body {
   left: 0;
   width: 500px;
   padding: 6px;
-  border: none;
+  border-color: #2fa6ea;
   margin-top: 8px;
   margin-left: 16px;
   font-size: 17px;
+ 
 }
 
 .common-button{
-  background-color: #293846; /* Green */
+  background-color: #2fa6ea; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -96,19 +107,20 @@ body {
 }
 
 .header-button{
-  background-color: white; /* Green */
+  background-color: #2fa6ea; /* Green */
   border: none;
-  color: black;
+  color: white;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   width: 100px;
-  margin: 15px;
   position: absolute;
-right: 0;
-margin-top: 10px;
+  right: 0;
+  height: 80%;
+  /* margin-top: 10px; */
+  align-self: center;
+  cursor: pointer;
 }
 
 

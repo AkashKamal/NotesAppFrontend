@@ -1,26 +1,32 @@
 import axios from 'axios';
 
-class AuthService{
+class AuthService {
 
- login(details) {
-   return axios.post(`http://localhost:8080/api/auth/signin`, {
-    email : details.email,
-   password:  details.password
-}).then(res => {
-    localStorage.setItem("token", res.data.jwt);
-    console.log(res.data.jwt);
-    return true
-});
-}
+  login(details) {
+    const response = { status: "", errorMessage: "" };
+    return axios.post(`http://localhost:8080/api/auth/signin`, {
+      email: details.email,
+      password: details.password
+    }).then(res => {
+      console.log(res);
+      localStorage.setItem("token", res.data.jwt);
+      response.status = "success";
+      return response;
+    }).catch(error => {
+      response.status = "error";
+      response.errorMessage = error.response.data.ErrorMessage;
+      return response;
+    });
+  }
 
- logout() {
+  logout() {
     localStorage.removeItem("token");
-}
+  }
 
-  isTokenAvailable(){
-      console.log(localStorage.getItem("token"));
-    return localStorage.getItem("token") != null ?  true :  false;
- }
+  isTokenAvailable() {
+    console.log(localStorage.getItem("token"));
+    return localStorage.getItem("token") != null ? true : false;
+  }
 }
 
 export default new AuthService();
