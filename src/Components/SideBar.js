@@ -5,6 +5,7 @@ import { CgNotes } from "react-icons/cg";
 import { BiLabel } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
 import { GrFavorite } from "react-icons/gr";
+import { GrNotes } from "react-icons/gr";
 
 export default function SideBar() {
 
@@ -45,7 +46,7 @@ export default function SideBar() {
     return (
         <>
             <div className="sideBar">
-                <h1 className="row">Logo</h1>
+                <h1 className="row"><GrNotes/></h1>
                 <ul className="sideBarList">
 
                     {
