@@ -53,6 +53,9 @@ function Notes() {
                         <div onClick={() => openEditor(item)} key={index} className="notesbox">
                             <div className="notesTitle">{item.title}</div>
                             <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                            <div className="notes-container-footer">
+                                <div className="note-time">{item.lastModifiedTime}</div>
+                                </div>
                         </div>
                     )
                 )

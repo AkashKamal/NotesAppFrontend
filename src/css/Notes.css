@@ -53,6 +53,10 @@ body{
   color: white;
 }
 
+/* Notes page header ends */
+
+/* Notes container header starts */
+
 .notesContainer{
     display: flex;
     flex-wrap: wrap;
@@ -61,7 +65,7 @@ body{
 }
 
 .notesbox{
-    width: 600px;
+    width: 700px;
     height:wrap;
     cursor: pointer;
     padding: 5px;
@@ -77,30 +81,28 @@ body{
   border-color: #2fa6ea;
 }
 
-.add-note{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
-}
 
 .notesTitle{
     font-size: large;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
 }
 
-.common-button{
-  background-color: #293846; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  width: 100px;
-  margin: 15px;
-  cursor: pointer;
+.notesContent{
+  margin: 5px;
+  margin-bottom: 30px;
 }
+
+.notes-container-footer{
+  display: flex;
+}
+
+.note-time{
+  font-size: 13px;
+  color: grey;
+  margin-left: auto;
+}
+
+/* Notes container ends */
+
