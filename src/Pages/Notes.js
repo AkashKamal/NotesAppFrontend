@@ -11,7 +11,7 @@ function Notes() {
 
     const [notesData, setNotesData] = useState([])
     const [isPopupOpen, setPopupState] = useState(false)
-    const [notesDetails, setNotesDetails] = useState({ title: "", content: "", favourite: false })
+    const [notesDetails, setNotesDetails] = useState()
 
 
     useEffect(() => {
@@ -33,36 +33,43 @@ function Notes() {
 
     return (
         <>
-            <div className="notesContainer">
-                <div className= "notes-header">
-                    <div className="notes-header-left">
-                        <div className="notes-sort"><CgSortAz size= "35"/>
-                        <div>Sort by</div>
-                        </div>
-                       
-                    </div>
-                    <div className="notes-header-right"  onClick={() => openEditor({ title: "", content: "" })}>
-                        <div className="new-note">
-                        <AiOutlineAppstoreAdd size={20} />
-                        <span>Add Note</span>
-                        </div>
-                    </div>
-                </div>
-                {notesData.map(
-                    (item, index) => (
-                        <div onClick={() => openEditor(item)} key={index} className="notesbox">
-                            <div className="notesTitle">{item.title}</div>
-                            <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                            <div className="notes-container-footer">
-                                <div className="note-time">{item.lastModifiedTime}</div>
-                                </div>
-                        </div>
-                    )
-                )
-                }
-                <NotesEditor open={isPopupOpen} notesDetails={notesDetails} onClose={() => setPopupState(false)}></NotesEditor>
+            <body>
+                <div className="notesContainer">
+                    <div className="notes-header">
+                        <div className="notes-header-left">
+                            <div className="notes-sort"><CgSortAz size="35" />
+                                <div>Sort by</div>
+                            </div>
 
-            </div>
+                        </div>
+                        <div className="notes-header-right" onClick={() => openEditor({ title: "", content: "" })}>
+                            <div className="new-note">
+                                <AiOutlineAppstoreAdd size={20} />
+                                <span>Add Note</span>
+                            </div>
+                        </div>
+                    </div>
+                    {notesData.map(
+                        (item, index) => (
+                            <div onClick={() => openEditor(item)} key={index} className="notesbox">
+                                <div className="notesTitle">{item.title}</div>
+                                <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                                <div className="notes-container-footer">
+                                    <div className="note-time">{item.lastModifiedTime}</div>
+                                </div>
+                            </div>
+                        )
+                    )
+                    }
+
+                    {
+                        (isPopupOpen) ? <NotesEditor notesDetails={notesDetails} onClose={() => setPopupState(false)}></NotesEditor> : <div></div>
+                    }
+
+
+
+                </div>
+            </body>
         </>
     )
 }

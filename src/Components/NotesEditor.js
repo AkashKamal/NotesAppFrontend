@@ -11,46 +11,38 @@ import { AiFillHeart } from "react-icons/ai";
 import { BiLabel } from "react-icons/bi";
 import { MdLabel } from "react-icons/md";
 
-function NotesEditor({ open, notesDetails, onClose }) {
+function NotesEditor({notesDetails, onClose }) {
 
+    const [isFav, setIsFav] = useState(notesDetails.favourite)
 
     const addFavourite = (note) => {
-        console.log(note.id)
-        const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" :"http://localhost:8080/api/v1/addFavourite";
-        const noteId = note.id;
+        const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" : "http://localhost:8080/api/v1/addFavourite";
         axios.post(url, note, {
             headers: {
                 crossdomain: true
             }
         }).then(res => {
-           notesDetails.favourite = !notesDetails.favourite
-           
+            setIsFav(isFav => !isFav);
         });
     }
 
-    useEffect(() => {
-    }, [], notesDetails)
-
     const toolbarRightIcons = [
         {
-            icon: (notesDetails.favourite) ? <AiFillHeart size="25" color="#2fa6ea"/> :<AiOutlineHeart size = "25" />,
+            icon: (isFav) ? <AiFillHeart size="25" color="#2fa6ea" /> : <AiOutlineHeart size="25" />,
             onClick: "addFavourite(notesDetails)",
-            className : "toolbar-items"
+            className: "toolbar-items"
         },
         {
-            icon: (notesDetails.label) ? <MdLabel size="25"/> : <BiLabel size = "25"/>,
+            icon: (notesDetails.label) ? <MdLabel size="25" /> : <BiLabel size="25" />,
             onClick: " ",
-            className : "toolbar-items"
+            className: "toolbar-items"
         },
         {
             icon: <AiOutlineDelete size="25" />,
             onClick: " ",
-            className : "toolbar-items"
+            className: "toolbar-items"
         }
     ];
-
-
-   
 
     const saveNote = (note) => {
         const content = document.getElementById('editor-content').innerHTML;
@@ -68,8 +60,6 @@ function NotesEditor({ open, notesDetails, onClose }) {
         });
     }
 
-    if (!open) return null
-    console.log(open)
     return ReactDom.createPortal(
         <>
             <div className="editorOverlay">
@@ -81,13 +71,9 @@ function NotesEditor({ open, notesDetails, onClose }) {
                             <AiOutlineItalic size="25" className="toolbar-items" />
                         </div>
                         <div className="toolbar-right">
-                            {/* <AiOutlineHeart size="25" className="toolbar-items" />
-                            <BiLabel size="25" className="toolbar-items" />
-                            <AiOutlineDelete size="25" className="toolbar-items" /> */}
-                             {/* <div className="toolbar-items" ><AiOutlineDelete/></div> */}
                             {
-                                toolbarRightIcons.map((item,index)=>(
-                                  <div id ={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
+                                toolbarRightIcons.map((item, index) => (
+                                    <div id={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
                                 ))
                             }
                         </div>
