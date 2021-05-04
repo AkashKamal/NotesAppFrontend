@@ -10,10 +10,13 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { BiLabel } from "react-icons/bi";
 import { MdLabel } from "react-icons/md";
+import DeletePopup from "./DeletePopup"
 
 function NotesEditor({notesDetails, onClose }) {
 
     const [isFav, setIsFav] = useState(notesDetails.favourite)
+    const[isDeletePopup,setIsDeletePopup] = useState(false);
+    const[isLabelPopup,setIsLabelPopup] = useState(false);
 
     const addFavourite = (note) => {
         const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" : "http://localhost:8080/api/v1/addFavourite";
@@ -26,6 +29,13 @@ function NotesEditor({notesDetails, onClose }) {
         });
     }
 
+    const deleteNote = () => {
+        console.log("will delete it");
+        setIsDeletePopup(false);
+        onClose();
+    }
+
+
     const toolbarRightIcons = [
         {
             icon: (isFav) ? <AiFillHeart size="25" color="#2fa6ea" /> : <AiOutlineHeart size="25" />,
@@ -34,12 +44,12 @@ function NotesEditor({notesDetails, onClose }) {
         },
         {
             icon: (notesDetails.label) ? <MdLabel size="25" /> : <BiLabel size="25" />,
-            onClick: " ",
+            onClick: "",
             className: "toolbar-items"
         },
         {
             icon: <AiOutlineDelete size="25" />,
-            onClick: " ",
+            onClick: "setIsDeletePopup(true)",
             className: "toolbar-items"
         }
     ];
@@ -60,9 +70,10 @@ function NotesEditor({notesDetails, onClose }) {
         });
     }
 
-    return ReactDom.createPortal(
+    return (
         <>
             <div className="editorOverlay">
+                <div className="empty-space"></div>
                 <div className="notesEditorContainer">
                     <div id='editor-title' contentEditable='true' data-placeholder='Title...' className='editor-title' >{notesDetails.title}</div>
                     <div className="toolbar">
@@ -85,8 +96,9 @@ function NotesEditor({notesDetails, onClose }) {
                     </div>
                 </div>
             </div>
-        </>,
-        document.getElementById("editor")
+
+            {(isDeletePopup) ? <DeletePopup props = {"Aree you sure you want to delete this note?"} deleteAction={()=>deleteNote()} onClose={()=> setIsDeletePopup(false)}></DeletePopup> : ""}
+        </>
     )
 }
 

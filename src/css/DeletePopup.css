@@ -1,0 +1,38 @@
+.delete-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+.delete-popup-container{
+    background-color: white;
+    position: absolute;
+    left:25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    width: 550px;
+    height: fit-content;
+}
+
+.delete-message-content{
+    margin: 15px;
+}
+
+.options{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.delete-message{
+    margin: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+}

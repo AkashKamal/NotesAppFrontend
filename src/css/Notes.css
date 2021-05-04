@@ -31,6 +31,10 @@ body{
   width: 130px;
 }
 
+.new-note span{
+  margin-left: 10px;
+}
+
 .notes-header-left{
   display: flex;
   flex-direction: row;
