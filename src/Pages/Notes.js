@@ -20,7 +20,7 @@ function Notes() {
                 crossdomain: true,
             }
         }).then(res => {
-            console.log(res.data);
+            console.log(res);
             setNotesData(res.data);
             return "success"
         });
@@ -33,43 +33,39 @@ function Notes() {
 
     return (
         <>
-            <body>
-                <div className="notesContainer">
-                    <div className="notes-header">
-                        <div className="notes-header-left">
-                            <div className="notes-sort"><CgSortAz size="35" />
-                                <div>Sort by</div>
-                            </div>
 
+            <div className="notesContainer">
+                <div className="notes-header">
+                    <div className="notes-header-left">
+                        <div className="notes-sort"><CgSortAz size="35" />
+                            <div>Sort by</div>
                         </div>
-                        <div className="notes-header-right" onClick={() => openEditor({ title: "", content: "" })}>
-                            <div className="new-note">
-                                <AiOutlineAppstoreAdd size={20} />
-                                <span>Add Note</span>
-                            </div>
+
+                    </div>
+                    <div className="notes-header-right" onClick={() => openEditor({ title: "", content: "" })}>
+                        <div className="new-note">
+                            <AiOutlineAppstoreAdd size={20} />
+                            <span>Add Note</span>
                         </div>
                     </div>
-                    {notesData.map(
-                        (item, index) => (
-                            <div onClick={() => openEditor(item)} key={index} className="notesbox">
-                                <div className="notesTitle">{item.title}</div>
-                                <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                                <div className="notes-container-footer">
-                                    <div className="note-time">{item.lastModifiedTime}</div>
-                                </div>
-                            </div>
-                        )
-                    )
-                    }
-
-                    {
-                        (isPopupOpen) ? <NotesEditor notesDetails={notesDetails} onClose={() => setPopupState(false)}></NotesEditor> : <div></div>
-                    }
-
-
-
                 </div>
-            </body>
+                {notesData.map(
+                    (item, index) => (
+                        <div onClick={() => openEditor(item)} key={index} className="notesbox">
+                            <div className="notesTitle">{item.title}</div>
+                            <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                            <div className="notes-container-footer">
+                                <div className="note-time">{item.modifiedTime}</div>
+                            </div>
+                        </div>
+                    )
+                )
+                }
+
+                {
+                    (isPopupOpen) ? <NotesEditor notesDetails={notesDetails} onClose={() => setPopupState(false)}></NotesEditor> : <div></div>
+                }
+            </div>
         </>
     )
 }

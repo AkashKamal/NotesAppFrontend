@@ -20,9 +20,11 @@ function NotesEditor({notesDetails, onClose }) {
 
     const addFavourite = (note) => {
         const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" : "http://localhost:8080/api/v1/addFavourite";
-        axios.post(url, note, {
+        axios.post(url, null,  {
             headers: {
                 crossdomain: true
+            },params:{
+                "notesId" : note.id
             }
         }).then(res => {
             setIsFav(isFav => !isFav);
@@ -84,7 +86,7 @@ function NotesEditor({notesDetails, onClose }) {
                         <div className="toolbar-right">
                             {
                                 toolbarRightIcons.map((item, index) => (
-                                    <div id={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
+                                    <div key={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
                                 ))
                             }
                         </div>
