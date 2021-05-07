@@ -66,6 +66,7 @@ body{
     flex-wrap: wrap;
     padding: 10px;
     flex-direction: column;
+    margin: 0 auto;
 }
 
 .notesbox{
