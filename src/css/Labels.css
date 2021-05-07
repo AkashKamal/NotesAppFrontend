@@ -1,0 +1,79 @@
+.labels-container{
+ display: flex;
+ flex-direction: row;
+ height:auto;
+ height: 100%;
+}
+
+.labels-list{
+    display: flex;
+    flex-direction: column;
+    height:auto;
+    width: 20%;
+    border-right: 4px  solid #efefef;
+    align-items: center;
+}
+
+.notes-list{
+    height: auto;
+    width: 70%;
+}
+
+.label-list-header{
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 100%;
+    vertical-align:middle;
+    align-items: center;
+    /* padding: 10px; */
+}
+
+.label-search{
+    width: 300px;
+    height: 30px;
+    margin-left:10px;
+    border-color: #2fa6ea;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+.label-add{
+    display: flex;
+    width: 40px;
+    margin:10px;
+    background-color: #2fa6ea;
+    color: white;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 2px;
+    justify-content: center;
+}
+
+.new-label span{
+    margin-left: 10px;
+}
+
+.label{
+    display: flex;
+    width: 180px;
+    height: 40px;
+    border: 1px solid #adadad;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #f6f7f8;
+    border-radius: 4px;
+}
+
+.label-icon{
+    width: 30%;
+    margin: 10px;
+}
+
+.label-name{
+    width: 70%;
+    margin-left: 4px;
+    font-size: 17px;
+}
