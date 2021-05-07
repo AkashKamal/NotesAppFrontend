@@ -1,7 +1,5 @@
 import React from 'react'
 import "../css/NotesEditor.css"
-import ReactDom from "react-dom"
-import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { AiOutlineBold } from "react-icons/ai";
 import { AiOutlineItalic } from "react-icons/ai";
@@ -10,25 +8,18 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { BiLabel } from "react-icons/bi";
 import { MdLabel } from "react-icons/md";
+import NotesService from "../Services/NotesService"
 import DeletePopup from "./DeletePopup"
 
-function NotesEditor({notesDetails, onClose }) {
+function NotesEditor({ notesDetails, onClose }) {
 
     const [isFav, setIsFav] = useState(notesDetails.favourite)
-    const[isDeletePopup,setIsDeletePopup] = useState(false);
-    const[isLabelPopup,setIsLabelPopup] = useState(false);
+    const [isDeletePopup, setIsDeletePopup] = useState(false);
+    const [isLabelPopup, setIsLabelPopup] = useState(false);
 
-    const addFavourite = (note) => {
-        const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" : "http://localhost:8080/api/v1/addFavourite";
-        axios.post(url, null,  {
-            headers: {
-                crossdomain: true
-            },params:{
-                "notesId" : note.id
-            }
-        }).then(res => {
-            setIsFav(isFav => !isFav);
-        });
+    const toggleFavourite = (note) => {
+        NotesService.toogleFavourite(note).then(res => { setIsFav(isFav => !isFav); })
+
     }
 
     const deleteNote = () => {
@@ -41,7 +32,7 @@ function NotesEditor({notesDetails, onClose }) {
     const toolbarRightIcons = [
         {
             icon: (isFav) ? <AiFillHeart size="25" color="#2fa6ea" /> : <AiOutlineHeart size="25" />,
-            onClick: "addFavourite(notesDetails)",
+            onClick: "toggleFavourite(notesDetails)",
             className: "toolbar-items"
         },
         {
@@ -61,15 +52,9 @@ function NotesEditor({notesDetails, onClose }) {
         const title = document.getElementById('editor-title').textContent;
         notesDetails.title = title;
         notesDetails.content = content;
-        const url = (typeof notesDetails.id != 'undefined') ? `http://localhost:8080/api/v1/updateNote` : `http://localhost:8080/api/v1/addNote`
-        axios.post(url, notesDetails, {
-            headers: {
-                crossdomain: true
-            }
-        }).then(res => {
-            if (res.status)
-                onClose();
-        });
+        NotesService.saveNote(notesDetails).then(res => {
+            onClose();
+        })
     }
 
     return (
@@ -99,7 +84,7 @@ function NotesEditor({notesDetails, onClose }) {
                 </div>
             </div>
 
-            {(isDeletePopup) ? <DeletePopup props = {"Aree you sure you want to delete this note?"} deleteAction={()=>deleteNote()} onClose={()=> setIsDeletePopup(false)}></DeletePopup> : ""}
+            {(isDeletePopup) ? <DeletePopup props={"Aree you sure you want to delete this note?"} deleteAction={() => deleteNote()} onClose={() => setIsDeletePopup(false)}></DeletePopup> : ""}
         </>
     )
 }

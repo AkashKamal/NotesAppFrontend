@@ -1,13 +1,14 @@
 import React from 'react'
-import axios from 'axios'
 import { useState, useEffect } from 'react';
 import "../css/Notes.css"
 import NotesEditor from "../Components/NotesEditor"
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { CgSortAz } from "react-icons/cg";
+import NotesService from "../Services/NotesService"
+import LabelService from "../Services/LabelService"
 
 
-function Notes() {
+function Notes(label, Favourite) {
 
     const [notesData, setNotesData] = useState([])
     const [isPopupOpen, setPopupState] = useState(false)
@@ -15,15 +16,22 @@ function Notes() {
 
 
     useEffect(() => {
-        return axios.get(`http://localhost:8080/allNotes`, {
-            headers: {
-                crossdomain: true,
-            }
-        }).then(res => {
-            console.log(res);
-            setNotesData(res.data);
-            return "success"
-        });
+        console.log(label.id);
+
+        if(typeof label.id =="undefined")
+        {
+        NotesService.getAllNotes().then(
+            function (res) {
+                setNotesData(res);
+            });
+        }
+        else{
+            LabelService.getNotesOfLabel(label.id).then(
+                function(res){
+                    setNotesData(res);
+                }
+            )
+        }
     }, [], notesData)
 
     const openEditor = (notesDetails) => {
@@ -33,7 +41,6 @@ function Notes() {
 
     return (
         <>
-
             <div className="notesContainer">
                 <div className="notes-header">
                     <div className="notes-header-left">
@@ -49,17 +56,18 @@ function Notes() {
                         </div>
                     </div>
                 </div>
-                {notesData.map(
-                    (item, index) => (
-                        <div onClick={() => openEditor(item)} key={index} className="notesbox">
-                            <div className="notesTitle">{item.title}</div>
-                            <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                            <div className="notes-container-footer">
-                                <div className="note-time">{item.modifiedTime}</div>
+                {
+                    notesData.map(
+                        (item, index) => (
+                            <div onClick={() => openEditor(item)} key={index} className="notesbox">
+                                <div className="notesTitle">{item.title}</div>
+                                <div className="notesContent" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                                <div className="notes-container-footer">
+                                    <div className="note-time">{item.modifiedTime}</div>
+                                </div>
                             </div>
-                        </div>
+                        )
                     )
-                )
                 }
 
                 {
