@@ -1,9 +1,9 @@
 @font-face {
-    font-family: 'Roboto';
-    src: local('Roboto'), url(./fonts/Roboto-Regular.ttf) format('truetype');
+    font-family: 'LatoBold';
+    src: local('Roboto'), url(./fonts/Lato-Bold.ttf) format('truetype');
   }
 
   @font-face {
-    font-family: 'Robotobold';
-    src: local('Roboto'), url(./fonts/Roboto-Bold.ttf) format('truetype');
+    font-family: 'Lato';
+    src: local('Roboto'), url(./fonts/Lato-Regular.ttf) format('truetype');
   }
