@@ -8,35 +8,35 @@ import NotesService from "../Services/NotesService"
 import LabelService from "../Services/LabelService"
 
 
-function Notes(label, Favourite) {
+function Notes({ label }) {
 
     const [notesData, setNotesData] = useState([])
     const [isPopupOpen, setPopupState] = useState(false)
     const [notesDetails, setNotesDetails] = useState()
 
-
     useEffect(() => {
-        console.log(label.id);
-
-        if(typeof label.id =="undefined")
-        {
-        NotesService.getAllNotes().then(
-            function (res) {
-                setNotesData(res);
-            });
-        }
-        else{
-            LabelService.getNotesOfLabel(label.id).then(
-                function(res){
+        if (typeof label == "undefined") {
+            NotesService.getAllNotes().then(
+                function (res) {
                     setNotesData(res);
+                });
+        }
+        else {
+            LabelService.getNotesOfLabel(label).then(
+                function (res) {
+                    console.log("label id is " + label)
+                    setNotesData(res);
+                    console.log("Notes Data inside Api" + notesData)
+    
                 }
             )
         }
-    }, [], notesData)
+    }, [label,notesData])
 
     const openEditor = (notesDetails) => {
         setPopupState(true);
         setNotesDetails(notesDetails);
+        console.log("inside editor open")
     }
 
     return (
@@ -57,7 +57,7 @@ function Notes(label, Favourite) {
                     </div>
                 </div>
                 {
-                    notesData.map(
+                  !notesData ? "is loading" :  notesData.map(
                         (item, index) => (
                             <div onClick={() => openEditor(item)} key={index} className="notesbox">
                                 <div className="notesTitle">{item.title}</div>
