@@ -8,7 +8,7 @@ class AuthService {
       email: details.email,
       password: details.password
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       localStorage.setItem("token", res.data.jwt);
       response.status = "success";
       return response;
