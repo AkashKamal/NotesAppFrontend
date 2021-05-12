@@ -31,7 +31,7 @@ function Notes({ label }) {
                 }
             )
         }
-    }, [label,notesData])
+    }, [label])
 
     const openEditor = (notesDetails) => {
         setPopupState(true);

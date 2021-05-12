@@ -78,8 +78,8 @@ function NotesEditor({ notesDetails, onClose }) {
                     </div>
                     <div className='editor-content' id='editor-content' contentEditable='true' data-placeholder='Body...' dangerouslySetInnerHTML={{ __html: notesDetails.content }}></div>
                     <div className="editor-footer">
-                        <button name="Save" className="common-button" onClick={() => saveNote()}>Save</button>
-                        <button name="Close" className="common-button" onClick={onClose}>Close</button>
+                        <button name="Save" className="common-button medium" onClick={() => saveNote()}>Save</button>
+                        <button name="Close" className="common-button medium" onClick={onClose}>Close</button>
                     </div>
                 </div>
             </div>

@@ -5,36 +5,25 @@ import { useState, useEffect, useRef } from 'react';
 import LabelService from "../Services/LabelService"
 import { IoMdAdd } from "react-icons/io";
 import { BiLabel } from "react-icons/bi";
+import { BiEditAlt } from "react-icons/bi";
+import AddNewLabelPopup from "../Components/AddNewLabelPopup"
 
 function Labels() {
 
     const [labelList, setLabelsList] = useState([])
-    // const [notesData, setNotesData] = useState()
-    const [showNotes, setShowNotes] = useState(false);
-    const[labelID, setLabelId] = useState()
+    const [showNotes, setShowNotes] = useState(false)
+    const [labelID, setLabelId] = useState()
+    const [newLabelPopup,setNewLablePopup] = useState(false)
 
     useEffect(() => {
         LabelService.getAllLabels().then(res => {
             setLabelsList(res)
             setLabelId(res[0].id)
-            // getAllNotesOfLabel(res[0].id);
             setShowNotes(true);
         })
     }, []);
 
-    // const getAllNotesOfLabel = (id) => {
-    //     LabelService.getNotesOfLabel(id).then(
-    //         function (res) {
-    //             setNotesData(res);
-    //             console.log("Notes Data inside Api" + notesData)
-
-    //         }
-    //     )
-    // }
-
     const changelabel = (id) => {
-        // getAllNotesOfLabel(id);
-        // console.log("Notes Data inside change label" + notesData)
         setLabelId(id);
     }
 
@@ -43,9 +32,10 @@ function Labels() {
         <>
             <div className="labels-container">
                 <div className="labels-list">
+                    <h3>My labels</h3>
                     <div className="label-list-header">
                         <input type="text" placeholder="Search Labels" className="label-search"></input>
-                        <div className="label-add"><IoMdAdd size={20}></IoMdAdd></div>
+                        <div className="label-add" onClick={()=>setNewLablePopup(true)}><IoMdAdd size={20}></IoMdAdd></div>
                     </div>
                     {
                         labelList.map((value, key) => (
@@ -53,16 +43,21 @@ function Labels() {
                                 <div className="label" onClick={() => changelabel(value.id)} >
                                     <div className="label-icon"><BiLabel size={25} /></div>
                                     <div key={key} className="label-name">{value.labelName}</div>
+                                    <div className="label-edit-icon" onClick={() => {
+                                        console.log("edit label")
+                                    }}><BiEditAlt size={23} /></div>
+
                                 </div>
                             </>
                         ))
                     }
                 </div>
                 <div className="notes-list">
-
                     {showNotes && <Notes label={labelID} ></Notes>}
                 </div>
+                { newLabelPopup ? <AddNewLabelPopup onClose={()=> setNewLablePopup(false)}></AddNewLabelPopup> : ""}
             </div>
+           
         </>
     )
 }

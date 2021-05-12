@@ -1,0 +1,76 @@
+.addlabel-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.editlabel-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editlabel-header h4{
+    margin: 15px;
+}
+
+.close-icon{
+   align-items: flex-end;
+   align-content: flex-end;
+   justify-self: flex-end;
+   vertical-align: middle;
+   margin: 10px;
+}
+
+.add-label-container{
+    background-color: white;
+    position: absolute;
+    left:25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    width: 550px;
+    height: fit-content;
+    cursor: pointer;
+}
+.add-label-container h4{
+    text-align: center;
+}
+
+.labelname-input{
+    width: 95%;
+    margin: 10px;
+    align-content: center;
+    height: 40px;
+    border: none;
+    border-bottom: 3px solid #adadad;
+    outline: none; 
+    font-size: 15px;
+}
+.labelname-input:focus{
+    border-bottom: 3px solid black;
+}
+
+.labelname-input:focus::placeholder{
+    color: black;
+}
+
+.footer-options{
+    display: flex;
+    justify-content: center;
+}
+
+.small{
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 15px;
+    width: 90px;
+    margin: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }

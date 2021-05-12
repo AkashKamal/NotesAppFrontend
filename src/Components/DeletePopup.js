@@ -10,8 +10,8 @@ function DeletePopup({ props, deleteAction, onClose }) {
                     <div className="delete-message-content">
                         <div className="delete-message">{props}</div>
                         <div className ="options">
-                        <button name="Yes" className={"common-button"} onClick={() => deleteAction()}>Yes</button>
-                        <button name="No" className="common-button" onClick={onClose}>No</button>
+                        <button name="Yes" className="common-button medium alert" onClick={() => deleteAction()}>Yes</button>
+                        <button name="No" className="common-button medium" onClick={onClose}>No</button>
                         </div>
                     </div>
                 </div>
