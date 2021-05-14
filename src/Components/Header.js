@@ -1,17 +1,17 @@
 import React from 'react'
 import AuthService from "../Services/AuthService";
-import LoginForm from "../Components/LoginForm"
-import history from "./History"
+import { useHistory } from 'react-router-dom';
+
+
 function Header() {
 
+    const history = useHistory();
     function logout() {
         AuthService.logout();
         console.log("out");
         history.push("/login");
 
     }
-
-
     return (
         <>
             <div className="header">

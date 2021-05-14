@@ -14,6 +14,7 @@ function Labels() {
     const [showNotes, setShowNotes] = useState(false)
     const [labelID, setLabelId] = useState()
     const [newLabelPopup,setNewLablePopup] = useState(false)
+    const [activeLabel,setActivelabel] = useState();
 
     useEffect(() => {
         LabelService.getAllLabels().then(res => {
@@ -25,6 +26,11 @@ function Labels() {
 
     const changelabel = (id) => {
         setLabelId(id);
+    }
+
+    const editLabel = (label) =>{
+        setActivelabel(label);
+        setNewLablePopup(true);
     }
 
 
@@ -45,7 +51,7 @@ function Labels() {
                                     <div key={key} className="label-name">{value.labelName}</div>
                                     <div className="label-edit-icon" onClick={() => {
                                         console.log("edit label")
-                                    }}><BiEditAlt size={23} /></div>
+                                    }}><BiEditAlt size={23} onClick={() => editLabel(value)} /></div>
 
                                 </div>
                             </>
@@ -55,7 +61,7 @@ function Labels() {
                 <div className="notes-list">
                     {showNotes && <Notes label={labelID} ></Notes>}
                 </div>
-                { newLabelPopup ? <AddNewLabelPopup onClose={()=> setNewLablePopup(false)}></AddNewLabelPopup> : ""}
+                { newLabelPopup ? <AddNewLabelPopup props={activeLabel} onClose={()=> {setNewLablePopup(false);setActivelabel(null)}}></AddNewLabelPopup> : ""}
             </div>
            
         </>

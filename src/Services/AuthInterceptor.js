@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from 'react'
+import {Route,Redirect,useHistory,Link} from "react-router-dom";
+import history from '../Components/History'
+import Routes from "../Components/Routes"
 
 
 function AuthInterceptor() {
-
   axios.interceptors.request.use(
     (config) => {
       const accessToken = "Bearer "+ localStorage.getItem("token");
@@ -18,18 +20,9 @@ function AuthInterceptor() {
       Promise.reject(error);
     }
   );
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  
 
-export default AuthInterceptor
-
-
-
-axios.interceptors.response.use(
+  axios.interceptors.response.use(
     (response) => {return response;},
     function (error)  {
         const originalRequest = error.config;
@@ -46,6 +39,28 @@ axios.interceptors.response.use(
         //     }
         // });
         //}
+        if(error.response.status == 403)
+        {
+          localStorage.removeItem("token");
+          history.push("/login")
+          // return <Redirect to="/login" />
+          // <Route render={props => (
+          //   <Redirect to="/login" />
+          // )} />
+
+        }
         return Promise.reject(error);
     }
 );
+return (
+  <div>
+    
+  </div>
+)
+
+}
+
+export default AuthInterceptor
+
+
+

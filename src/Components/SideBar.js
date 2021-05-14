@@ -22,12 +22,12 @@ export default function SideBar() {
         },
         {
             name: "Favorite",
-            route: "/",
+            route: "/favourite",
             icon: <GrFavorite />
         },
         {
             name: "Trash",
-            route: "/",
+            route: "/trash",
             icon: <BsTrash />
         }
     ]

@@ -8,7 +8,6 @@ class AuthService {
       email: details.email,
       password: details.password
     }).then(res => {
-      // console.log(res);
       localStorage.setItem("token", res.data.jwt);
       response.status = "success";
       return response;
@@ -25,13 +24,9 @@ class AuthService {
 
   isTokenAvailable() {
     console.log(localStorage.getItem("token"));
+    console.log(localStorage.getItem("token") != null ? true : false)
     return localStorage.getItem("token") != null ? true : false;
   }
 }
 
 export default new AuthService();
-
-// export default {
-//     login,logout
-// };
-

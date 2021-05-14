@@ -5,7 +5,9 @@ import { GrClose } from "react-icons/gr";
 import "../css/LabelsPopups.css"
 
 function AddNewLabelPopup({ props, onClose }) {
-    const[labelName,setLableName] = useState()
+    const[labelName,setLableName] = useState(props ? props.labelName : "")
+    const header = props ? "Edit Label" : "Add a new label";
+    
     const addLabel = () => {
         var label = {"labelName" : labelName}
         LabelService.addLabel(label).then(
@@ -16,15 +18,14 @@ function AddNewLabelPopup({ props, onClose }) {
     }
     return (
         <>
-        {console.log("open")}
         <div className="addlabel-overlay">
         <div className="add-label-container">
             <div className="editlabel-header">
-            <h4>Add a new label</h4>
+            <h4>{header}</h4>
             <div className="close-icon" onClick={()=>{onClose()}}><GrClose ></GrClose></div>
             </div>
             <div className ="input-container">
-                <input className="labelname-input" type="text" placeholder="Label Name" onChange ={e => setLableName(e.target.value) }></input>
+                <input value={labelName} className="labelname-input" type="text" maxlength="30" placeholder="Label Name" onChange ={e => setLableName(e.target.value) }></input>
             </div>
             <div className="footer-options">
             <button name="Save" className="common-button small" onClick={() => addLabel()}>Save</button>
