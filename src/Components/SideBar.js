@@ -21,11 +21,6 @@ export default function SideBar() {
             icon: <BiLabel />
         },
         {
-            name: "Favorite",
-            route: "/favourite",
-            icon: <GrFavorite />
-        },
-        {
             name: "Trash",
             route: "/trash",
             icon: <BsTrash />

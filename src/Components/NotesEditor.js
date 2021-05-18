@@ -1,6 +1,6 @@
 import React from 'react'
 import "../css/NotesEditor.css"
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineBold } from "react-icons/ai";
 import { AiOutlineItalic } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -18,14 +18,17 @@ function NotesEditor({ notesDetails, onClose }) {
     const [isLabelPopup, setIsLabelPopup] = useState(false);
 
     const toggleFavourite = (note) => {
-        NotesService.toogleFavourite(note).then(res => { setIsFav(isFav => !isFav); })
+        NotesService.toogleFavourite(note).then(res => { setIsFav(isFav => !isFav); 
+             note.favourite = !note.favourite})
 
     }
 
-    const deleteNote = () => {
-        console.log("will delete it");
-        setIsDeletePopup(false);
-        onClose();
+    const deleteNote = (note) => {
+        NotesService.deleteNote(notesDetails.id).then(res =>{
+            setIsDeletePopup(false);
+            onClose();
+        })
+        
     }
 
 
@@ -33,17 +36,20 @@ function NotesEditor({ notesDetails, onClose }) {
         {
             icon: (isFav) ? <AiFillHeart size="25" color="#2fa6ea" /> : <AiOutlineHeart size="25" />,
             onClick: "toggleFavourite(notesDetails)",
-            className: "toolbar-items"
+            className: "toolbar-items",
+            visible : notesDetails.id
         },
         {
-            icon: (notesDetails.label) ? <MdLabel size="25" /> : <BiLabel size="25" />,
+            icon: ((notesDetails.label ) ? <MdLabel size="25" /> : <BiLabel size="25" />),
             onClick: "",
-            className: "toolbar-items"
+            className: "toolbar-items",
+            visible : notesDetails.id
         },
         {
             icon: <AiOutlineDelete size="25" />,
             onClick: "setIsDeletePopup(true)",
-            className: "toolbar-items"
+            className: "toolbar-items",
+            visible : notesDetails.id
         }
     ];
 
@@ -53,6 +59,7 @@ function NotesEditor({ notesDetails, onClose }) {
         notesDetails.title = title;
         notesDetails.content = content;
         NotesService.saveNote(notesDetails).then(res => {
+            console.log(res);
             onClose();
         })
     }
@@ -70,7 +77,7 @@ function NotesEditor({ notesDetails, onClose }) {
                         </div>
                         <div className="toolbar-right">
                             {
-                                toolbarRightIcons.map((item, index) => (
+                                toolbarRightIcons.filter((item)=> item.visible).map((item, index) => (
                                     <div key={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
                                 ))
                             }

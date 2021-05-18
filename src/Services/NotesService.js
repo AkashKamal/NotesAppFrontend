@@ -12,8 +12,9 @@ class NotesService {
     }
 
     toogleFavourite(note){
+        console.log(note)
         const url = (note.favourite) ? "http://localhost:8080/api/v1/removeFavourite" : "http://localhost:8080/api/v1/addFavourite";
-        return axios.post(url,  {
+        return axios.post(url, null,{
             headers: {
                 crossdomain: true
             },params:{
@@ -35,6 +36,16 @@ class NotesService {
                console.log(res);
                return res;
         });
+    }
+
+    deleteNote(noteId){
+        const url = "http://localhost:8080/api/v1/deleteNote"
+        return axios.delete(url,{
+            headers: {
+                crossdomain: true
+            },params:{
+                "notesId" : noteId
+            }}).then(res => res)
     }
 
 }

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from 'react'
 import {Route,Redirect,useHistory,Link} from "react-router-dom";
-import history from '../Components/History'
 import Routes from "../Components/Routes"
 
 
 function AuthInterceptor() {
+
+  const history = useHistory();
   axios.interceptors.request.use(
     (config) => {
       const accessToken = "Bearer "+ localStorage.getItem("token");
