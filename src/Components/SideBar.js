@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory,useRouteMatch } from 'react-router-dom';
 import "../css/HomePage.css"
 import { CgNotes } from "react-icons/cg";
 import { BiLabel } from "react-icons/bi";
@@ -8,7 +8,7 @@ import { GrFavorite } from "react-icons/gr";
 import { GrNotes } from "react-icons/gr";
 
 export default function SideBar() {
-
+    let { path, url } = useRouteMatch();
     const sideBarItems = [
         {
             name: "Notes",
@@ -26,15 +26,11 @@ export default function SideBar() {
             icon: <BsTrash />
         }
     ]
-    const [activeItem, setActiveItem] = useState(0);
-
-    useEffect(() => {
-    }, [activeItem])
 
     const history = useHistory();
     const handleClick = (url, index) => {
         history.push(url);
-        setActiveItem(index);
+       
         console.log(index);
     }
 
@@ -47,7 +43,7 @@ export default function SideBar() {
                     {
                         sideBarItems.map((item, index) => (
                             <li key={index} className="row"
-                                id={index == activeItem ? "active" : "test"}
+                                id={path.startsWith(item.route) ? "active" : ""}
                                 onClick={() => handleClick(item.route, index)}>
                                 <div id="icon">{item.icon}</div>
                                 <div id="title">{item.name}</div>
