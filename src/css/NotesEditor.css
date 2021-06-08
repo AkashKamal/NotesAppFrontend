@@ -18,32 +18,50 @@
     height: 100%;
     transform: translate();
     background-color:white;
-    padding: 50px;
     
 }
 
+.fullScreen{
+  width: 90%;
+}
+
+.editor-header{
+  display: flex;
+  margin-top: 20px;
+  height: 5%;
+  width: 95%;
+  align-self: center;
+  border-bottom:1px solid #adadad;
+}
+
+.editor-body{
+  height: 80%;
+  margin-inline: 3%;
+}
+
+.close-icon{
+  align-items: flex-end;
+  align-content: flex-end;
+  justify-self: flex-end;
+  vertical-align: middle;
+  cursor: pointer;
+}
 
 
 .editor-content {
     width: 95%;
     height: 70%;
-   
+    margin: 5px;
     font-size: 20px;
-    padding: 5px;
-    /* border:1px solid #adadad;   */
   }
  
   .editor-title {
     width: 95%;
-    padding: 10px;
     font-size: 25px;
-    border-bottom:1px solid #adadad;
-   text-align: center;
+    text-align: center;
     
   }
   .editor-content:focus, .editor-title:focus {
-    /* border:1px solid ;
-    box-shadow: 0 0 10px #293846; */
     outline: 0px solid transparent;
   }
 
@@ -59,14 +77,15 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 10%;
   }
 
   /* Tool bar css starts */
 
   .toolbar{
     width: auto;
-    padding: 10px;
    display: flex;
+   margin: 5px;
 }
 
 .toolbar-right{

@@ -10,7 +10,6 @@ function Header() {
         AuthService.logout();
         console.log("out");
         history.push("/login");
-
     }
     return (
         <>

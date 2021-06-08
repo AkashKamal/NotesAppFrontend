@@ -6,29 +6,35 @@ import { AiOutlineItalic } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import { BsArrowsAngleExpand } from "react-icons/bs";
+import { BsArrowsAngleContract } from "react-icons/bs";
 import { BiLabel } from "react-icons/bi";
 import { MdLabel } from "react-icons/md";
 import NotesService from "../Services/NotesService"
 import DeletePopup from "./DeletePopup"
+import { GrClose } from "react-icons/gr";
 
 function NotesEditor({ notesDetails, onClose }) {
 
     const [isFav, setIsFav] = useState(notesDetails.favourite)
     const [isDeletePopup, setIsDeletePopup] = useState(false);
     const [isLabelPopup, setIsLabelPopup] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
 
     const toggleFavourite = (note) => {
-        NotesService.toogleFavourite(note).then(res => { setIsFav(isFav => !isFav); 
-             note.favourite = !note.favourite})
+        NotesService.toogleFavourite(note).then(res => {
+            setIsFav(isFav => !isFav);
+            note.favourite = !note.favourite
+        })
 
     }
 
     const deleteNote = (note) => {
-        NotesService.deleteNote(notesDetails.id).then(res =>{
+        NotesService.deleteNote(notesDetails.id).then(res => {
             setIsDeletePopup(false);
             onClose();
         })
-        
+
     }
 
 
@@ -37,19 +43,19 @@ function NotesEditor({ notesDetails, onClose }) {
             icon: (isFav) ? <AiFillHeart size="25" color="#2fa6ea" /> : <AiOutlineHeart size="25" />,
             onClick: "toggleFavourite(notesDetails)",
             className: "toolbar-items",
-            visible : notesDetails.id
+            visible: notesDetails.id
         },
         {
-            icon: ((notesDetails.label ) ? <MdLabel size="25" /> : <BiLabel size="25" />),
+            icon: ((notesDetails.label) ? <MdLabel size="25" /> : <BiLabel size="25" />),
             onClick: "",
             className: "toolbar-items",
-            visible : notesDetails.id
+            visible: notesDetails.id
         },
         {
             icon: <AiOutlineDelete size="25" />,
             onClick: "setIsDeletePopup(true)",
             className: "toolbar-items",
-            visible : notesDetails.id
+            visible: notesDetails.id
         }
     ];
 
@@ -67,26 +73,32 @@ function NotesEditor({ notesDetails, onClose }) {
     return (
         <>
             <div className="editorOverlay">
-                <div className="empty-space"></div>
-                <div className="notesEditorContainer">
-                    <div id='editor-title' contentEditable='true' data-placeholder='Title...' className='editor-title' >{notesDetails.title}</div>
-                    <div className="toolbar">
-                        <div className="toolbar-left">
-                            <AiOutlineBold size="25" className="toolbar-items" />
-                            <AiOutlineItalic size="25" className="toolbar-items" />
-                        </div>
-                        <div className="toolbar-right">
-                            {
-                                toolbarRightIcons.filter((item)=> item.visible).map((item, index) => (
-                                    <div key={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
-                                ))
-                            }
-                        </div>
+                <div id="container" className={isFullScreen ? "notesEditorContainer fullScreen" : "notesEditorContainer"}>
+                    <div className="editor-header">
+                        <div id='editor-title' contentEditable='true' data-placeholder='Title...' className='editor-title' >{notesDetails.title}</div>
+                        <div className="close-icon" onClick={() => { onClose() }}><GrClose ></GrClose></div>
                     </div>
-                    <div className='editor-content' id='editor-content' contentEditable='true' data-placeholder='Body...' dangerouslySetInnerHTML={{ __html: notesDetails.content }}></div>
+                    <div className="editor-body">
+                        <div className="toolbar">
+                            <div className="toolbar-left">
+                                {(!isFullScreen) ? <BsArrowsAngleExpand onClick={() => setIsFullScreen(true)} size="25" className="toolbar-items" /> : <BsArrowsAngleContract onClick={() => setIsFullScreen(false)} size="25" className="toolbar-items" />}
+                                <AiOutlineBold size="25" className="toolbar-items" />
+                                <AiOutlineItalic size="25" className="toolbar-items" />
+                            </div>
+                            <div className="toolbar-right">
+                                {
+                                    toolbarRightIcons.filter((item) => item.visible).map((item, index) => (
+                                        <div key={index} className={item.className} onClick={() => eval(item.onClick)}>{item.icon}</div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <div className='editor-content' id='editor-content' contentEditable='true' data-placeholder='Body...' dangerouslySetInnerHTML={{ __html: notesDetails.content }}></div>
+                    </div>
                     <div className="editor-footer">
                         <button name="Save" className="common-button medium" onClick={() => saveNote()}>Save</button>
-                        <button name="Close" className="common-button medium" onClick={onClose}>Close</button>
+        
                     </div>
                 </div>
             </div>
