@@ -18,6 +18,22 @@ class AuthService {
     });
   }
 
+  signup(details){
+    const response = { status: "", errorMessage: "" };
+    return axios.post(`http://localhost:8080/api/auth/signup`, {
+      email: details.email,
+      password: details.password
+    }).then(res => {
+      response.status = "success";
+      return response;
+    }).catch(error => {
+      response.status = "error";
+      console.log(error)
+      response.errorMessage = error.response.data.ErrorMessage;
+      return response;
+    });
+  }
+
   logout() {
     localStorage.removeItem("token");
   }

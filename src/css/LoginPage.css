@@ -8,20 +8,25 @@ body{
 .loginComp{
     display: flex;
     flex-direction: column;
-    position: absolute;
+    justify-content: center;
+    align-items: center ;
+    height: 100vh;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
     width: 400px;
-    top:50%;
-    left:50%;
-    height: 400px;
-    transform : translate(-50%,-50%);
+    height: wrap;
     background: white;
     border-radius: 10px;
     padding: 20px;
     border:1px #2fa6ea ;
     box-shadow: 0 0 10px #2fa6ea;
+   
 }
 
-.loginComp h1{
+.loginComp h2{
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
@@ -30,13 +35,14 @@ body{
 .loginComp .form-group{
     position: relative;
     border-bottom: 2px solid #adadad;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .loginComp .errorMessage{
-    color:rgb(99, 0, 0);
+    color:rgb(192, 7, 7);
     text-align: center;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .form-group input{
@@ -69,4 +75,22 @@ input[type="submit"]{
     color: white;
    align-self: center;
   
+}
+
+.forgot-password{
+    align-self: center;
+    color: #2fa6ea;
+    display: flex;
+    margin-top: 20px;
+}
+
+.signup-content{
+    display: flex;
+    margin: 20px;
+}
+
+.signup-link{
+    align-self: center;
+    color: #2fa6ea;
+    display: flex;
 }

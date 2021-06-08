@@ -5,9 +5,9 @@ import "../css/LoginPage.css"
 import { useHistory } from 'react-router-dom';
 import "../index.css"
 
-export default function LoginForm(){
+export default function SignupForm(){
 
-    const [details,setDetails] = useState({email :"" , password :""});
+    const [details,setDetails] = useState({email :"" , password :"",confirmPassword:""});
     const history = useHistory();
     const submitHandler = e => {
         e.preventDefault();
@@ -16,14 +16,18 @@ export default function LoginForm(){
             document.getElementById("errorMessage").innerHTML = "Please fill the details";
             return;
         }
-        const authResponse = AuthService.login(details);
+        if(details.password !=  details.confirmPassword){
+            document.getElementById("errorMessage").innerHTML = "Password mismatches. Try again";
+            return;
+        }
+        const authResponse = AuthService.signup(details);
         authResponse.then(
             function(value){
                 if(value.status == "success"){
-                        history.push("/notes");
+                        history.push("/login");
                 }
                 else{
-                    console.log(authResponse);
+                    // console.log(authResponse);
                     document.getElementById("errorMessage").innerHTML = value.errorMessage;
                 }
             }
@@ -34,7 +38,7 @@ export default function LoginForm(){
        <div className= "loginComp">
         <form onSubmit={submitHandler}>
             <div className="loginForm">
-            <h2>Sign in</h2>
+            <h2>Create your New Account</h2>
             <div className="form-group">
                 <input type="email" name ="email" id = "email" onChange={e => setDetails({...details, email : e.target.value})}></input>
                 <label htmlFor = "email">Email ID : </label>
@@ -43,15 +47,16 @@ export default function LoginForm(){
                 <input type="password" name ="password" id="password" onChange={e => setDetails({...details, password : e.target.value})}></input>
                 <label htmlFor = "password">Password: </label>
             </div>
+            <div className="form-group">
+                <input type="password" name ="confirm-password" id="confirm-password" onChange={e => setDetails({...details, confirmPassword : e.target.value})}></input>
+                <label htmlFor = "password">Confirm Password: </label>
+            </div>
             
             <label className="errorMessage" id="errorMessage"></label>
-            <input type="submit" value = "Login"></input> 
-            <a className ="forgot-password" href="">Forgot password?</a>
+            <input type="submit" value = "Sign up"></input> 
             </div>
         </form>
-        <div className="signup-content">
-       <span>New to notes?   </span><a className ="signup-link" href="/signup">Signup here</a>
-       </div>
+        <a className ="signup-content signup-link" href="/login">Back to login</a>
         </div>
         
       

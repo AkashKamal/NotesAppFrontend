@@ -30,8 +30,6 @@ export default function SideBar() {
     const history = useHistory();
     const handleClick = (url, index) => {
         history.push(url);
-       
-        console.log(index);
     }
 
     return (
