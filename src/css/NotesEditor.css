@@ -18,6 +18,7 @@
     height: 100%;
     transform: translate();
     background-color:white;
+    transition: width 0.25s;
     
 }
 

@@ -4,11 +4,15 @@ import "../css/HomePage.css"
 import { CgNotes } from "react-icons/cg";
 import { BiLabel } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
-import { GrFavorite } from "react-icons/gr";
-import { GrNotes } from "react-icons/gr";
+import { GiGriffinSymbol } from "react-icons/gi";
+import { RiAddLine } from "react-icons/ri";
+import Notes from '../Pages/Notes';
+import NotesEditor from "../Components/NotesEditor"
+//import OpenNewEditor from '../Pages/Notes';
 
 export default function SideBar() {
     let { path, url } = useRouteMatch();
+    const [isPopupOpen, setPopupState] = useState(false)
     const sideBarItems = [
         {
             name: "Notes",
@@ -27,6 +31,11 @@ export default function SideBar() {
         }
     ]
 
+    const newEditor = () => {
+        setPopupState(true)
+       
+    }
+
     const history = useHistory();
     const handleClick = (url, index) => {
         history.push(url);
@@ -35,7 +44,11 @@ export default function SideBar() {
     return (
         <>
             <div className="sideBar">
-                <h1 className="row"><GrNotes/></h1>
+                <h1 className="row"><GiGriffinSymbol/></h1>
+                <div className="new-note" onClick={() => newEditor()}>
+                                <RiAddLine size={20} />
+                                <span>Add Note</span>
+                            </div>
                 <ul className="sideBarList">
 
                     {
@@ -51,6 +64,9 @@ export default function SideBar() {
                     }
                 </ul>
             </div>
+            {
+                (isPopupOpen) ? <NotesEditor notesDetails={{ title: "", content: "" }} onClose={() => setPopupState(false)}></NotesEditor> : <div></div>
+            }
         </>
     )
 }

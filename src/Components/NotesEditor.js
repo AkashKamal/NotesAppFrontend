@@ -6,6 +6,8 @@ import { AiOutlineItalic } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineOrderedList } from "react-icons/ai";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BsArrowsAngleExpand } from "react-icons/bs";
 import { BsArrowsAngleContract } from "react-icons/bs";
 import { BiLabel } from "react-icons/bi";
@@ -13,6 +15,7 @@ import { MdLabel } from "react-icons/md";
 import NotesService from "../Services/NotesService"
 import DeletePopup from "./DeletePopup"
 import { GrClose } from "react-icons/gr";
+import { createPortal } from "react-dom";
 
 function NotesEditor({ notesDetails, onClose }) {
 
@@ -70,7 +73,7 @@ function NotesEditor({ notesDetails, onClose }) {
         })
     }
 
-    return (
+    return createPortal(
         <>
             <div className="editorOverlay">
                 <div id="container" className={isFullScreen ? "notesEditorContainer fullScreen" : "notesEditorContainer"}>
@@ -81,9 +84,11 @@ function NotesEditor({ notesDetails, onClose }) {
                     <div className="editor-body">
                         <div className="toolbar">
                             <div className="toolbar-left">
-                                {(!isFullScreen) ? <BsArrowsAngleExpand onClick={() => setIsFullScreen(true)} size="25" className="toolbar-items" /> : <BsArrowsAngleContract onClick={() => setIsFullScreen(false)} size="25" className="toolbar-items" />}
+                                {(!isFullScreen) ? <BsArrowsAngleExpand onClick={() => setIsFullScreen(true)} size="20" className="toolbar-items" /> : <BsArrowsAngleContract onClick={() => setIsFullScreen(false)} size="20" className="toolbar-items" />}
                                 <AiOutlineBold size="25" className="toolbar-items" />
                                 <AiOutlineItalic size="25" className="toolbar-items" />
+                                <AiOutlineOrderedList size="25" className="toolbar-items" />
+                                <AiOutlineUnorderedList size="25" className="toolbar-items" />
                             </div>
                             <div className="toolbar-right">
                                 {
@@ -104,8 +109,9 @@ function NotesEditor({ notesDetails, onClose }) {
             </div>
 
             {(isDeletePopup) ? <DeletePopup props={"Aree you sure you want to delete this note?"} deleteAction={() => deleteNote()} onClose={() => setIsDeletePopup(false)}></DeletePopup> : ""}
-        </>
+        </>,document.body
     )
+  
 }
 
 export default NotesEditor

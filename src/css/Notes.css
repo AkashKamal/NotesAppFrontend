@@ -20,21 +20,6 @@ body{
   margin-right: 10px;
 }
 
-.new-note{
-  cursor: pointer;
-  justify-content: center;
-  display: flex;
-  margin: 10px;
-  padding: 10px;
-  background-color: #2fa6ea;
-  color: white;
-  width: 130px;
-}
-
-.new-note span{
-  margin-left: 10px;
-}
-
 .notes-header-left{
   display: flex;
   flex-direction: row;
@@ -110,4 +95,37 @@ body{
 }
 
 /* Notes container ends */
+
+/* Empty container starts */
+
+.empty-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.contents{
+  width:fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.contents:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+
+.add-icon{
+  margin: 20px;
+}
+
+
+
+/* Empty container ends */
 

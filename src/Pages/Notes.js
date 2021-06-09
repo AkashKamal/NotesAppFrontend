@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import "../css/Notes.css"
 import NotesEditor from "../Components/NotesEditor"
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
-import { CgSortAz } from "react-icons/cg";
+import { BiSort } from "react-icons/bi";
 import { BiAddToQueue } from "react-icons/bi";
 import NotesService from "../Services/NotesService"
 import LabelService from "../Services/LabelService"
@@ -38,7 +38,6 @@ function Notes({ label }) {
     const openEditor = (notesDetails) => {
         setPopupState(true);
         setNotesDetails(notesDetails);
-        console.log("inside editor open")
     }
 
     return (
@@ -47,16 +46,10 @@ function Notes({ label }) {
                 <div className="notesContainer">
                     <div className="notes-header">
                         <div className="notes-header-left">
-                            <div className="notes-sort"><CgSortAz size="35" />
+                            <div className="notes-sort"><BiSort size="25" />
                                 <div>Sort by</div>
                             </div>
 
-                        </div>
-                        <div className="notes-header-right" onClick={() => openEditor({ title: "", content: "" })}>
-                            <div className="new-note">
-                                <AiOutlineAppstoreAdd size={20} />
-                                <span>Add Note</span>
-                            </div>
                         </div>
                     </div>
                     {
@@ -93,3 +86,4 @@ function Notes({ label }) {
 }
 
 export default Notes
+
