@@ -69,8 +69,8 @@ body {
 
 .sideBarList .row:hover{
   cursor: pointer;
-  background-color: #1d8ccc;
-  color : white;
+  background-color: #cecece;
+
 }
 
 .sideBarList #active{
