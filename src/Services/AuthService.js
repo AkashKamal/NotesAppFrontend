@@ -13,7 +13,7 @@ class AuthService {
       return response;
     }).catch(error => {
       response.status = "error";
-      response.errorMessage = error.response.data.ErrorMessage;
+      response.errorMessage = error.response.data.message;
       return response;
     });
   }
@@ -29,7 +29,7 @@ class AuthService {
     }).catch(error => {
       response.status = "error";
       console.log(error)
-      response.errorMessage = error.response.data.ErrorMessage;
+      response.errorMessage = error.response.data.message;
       return response;
     });
   }

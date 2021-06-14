@@ -40,7 +40,7 @@ function AuthInterceptor() {
         //     }
         // });
         //}
-        if(error.response.status == 403)
+        if(error.response.data.code == 414)
         {
           localStorage.removeItem("token");
           history.push("/login")
