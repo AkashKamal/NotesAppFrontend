@@ -5,6 +5,7 @@ import NotesEditor from "../Components/NotesEditor"
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BiSort } from "react-icons/bi";
 import { BiAddToQueue } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
 import NotesService from "../Services/NotesService"
 import LabelService from "../Services/LabelService"
 
@@ -56,11 +57,7 @@ function Notes({ label }) {
                             <FiSettings size="18" className="manage-label-icon"/>
                             <span>Manage Labels</span>
                             </div> : ""
-                            }    
-                            <div className="views-list">
-                                {/* <BsViewStacked size="20"/>
-                                <BsGrid size = "20"/> */}
-                                </div>   
+                            }     
                         </div>
                     </div>
                     {
