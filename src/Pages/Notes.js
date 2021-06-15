@@ -14,10 +14,10 @@ function Notes({ label }) {
     const [notesData, setNotesData] = useState([])
     const [isPopupOpen, setPopupState] = useState(false)
     const [notesDetails, setNotesDetails] = useState()
-    const isLabelWindow = typeof label == "undefined"
+    const isLabelWindow = typeof label != "undefined"
 
     useEffect(() => {
-        if (isLabelWindow) {
+        if (!isLabelWindow) {
             NotesService.getAllNotes().then(
                 function (res) {
                     setNotesData(res);
@@ -49,7 +49,18 @@ function Notes({ label }) {
                             <div className="notes-sort"><BiSort size="25" />
                                 <div>Sort by</div>
                             </div>
-
+                        </div>
+                        <div className="notes-header-right">
+                           { isLabelWindow ?
+                            <div className="manage-labels-button common-button">
+                            <FiSettings size="18" className="manage-label-icon"/>
+                            <span>Manage Labels</span>
+                            </div> : ""
+                            }    
+                            <div className="views-list">
+                                {/* <BsViewStacked size="20"/>
+                                <BsGrid size = "20"/> */}
+                                </div>   
                         </div>
                     </div>
                     {

@@ -8,16 +8,17 @@ body{
 
 .notes-header{
   width: 100%;
-  height: wrap;
+  height: 10%;
+  background-color: white;
   display: flex;
-  margin: 5px;
+  /* margin: 5px; */
 }
 
 .notes-header-right{
   display: flex;
   flex-direction: row;
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 
 .notes-header-left{
@@ -30,10 +31,11 @@ body{
   justify-content: center;
   display: flex;
   margin: 10px;
+  align-self: center;
 }
 
 .notes-sort div{
-  align-self: center;
+  /* align-self: center; */
   margin-right: 5px;
 }
 
@@ -49,7 +51,7 @@ body{
 .notesContainer{
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
+    /* padding: 10px; */
     flex-direction: column;
     margin: 0 auto;
 }
@@ -129,3 +131,27 @@ body{
 
 /* Empty container ends */
 
+/* Labels related css starts */
+
+.manage-labels-button{
+ display: flex;
+ border-radius: 3px;
+  padding: 10px;
+  margin: 10px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.manage-label-icon{
+  align-self: center;
+  vertical-align: middle;
+  align-items: center;
+  margin-right: 5px;
+}
+.manage-labels-button span{
+ align-self: center;
+ vertical-align: middle;
+ font-size: 18px;
+ /* margin-left: 4px; */
+}
+/* Labels related css ends */
