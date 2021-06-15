@@ -9,7 +9,9 @@ function AuthInterceptor() {
   const history = useHistory();
   axios.interceptors.request.use(
     (config) => {
-      const accessToken = "Bearer "+ localStorage.getItem("token");
+      const token = localStorage.getItem("token");
+      
+      const accessToken = token ? "Bearer "+ localStorage.getItem("token") : null;
       console.log(accessToken);
       if (accessToken) {
         config.headers["Authorization"] = accessToken;
