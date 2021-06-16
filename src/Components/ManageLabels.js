@@ -38,7 +38,7 @@ function ManageLabels({ labels, onClose }) {
                     <div className="popup-body">
                         <div className="labels-list-container-in-popup">
                             {labelsList.map((item, index) => (
-                                <div key={index} className="label-item-inpopup">
+                                <ul key={index} className="label-item-inpopup">
                                     <div className="right-items">
                                         <div className="icon"><BiLabel size="20" /></div>
                                         <div className="title">{item.labelName}</div>
@@ -47,7 +47,7 @@ function ManageLabels({ labels, onClose }) {
                                     <div className="icon"><FiEdit size="20"/></div>
                                     <div className="icon"> <FiDelete size="20"/></div>
                                     </div>
-                                </div>
+                                </ul>
                             ))}
                         </div>
                         <div className="addlabel-popup">
