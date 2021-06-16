@@ -4,12 +4,14 @@ import "../css/HomePage.css"
 import { CgNotes } from "react-icons/cg";
 import { BiLabel } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown,IoIosArrowUp } from "react-icons/io";
 import { GiGriffinSymbol } from "react-icons/gi";
 import { RiAddLine } from "react-icons/ri";
 import NotesEditor from "../Components/NotesEditor"
+import AddNewLabelPopup from "../Components/AddNewLabelPopup"
 import LabelService from "../Services/LabelService"
+import { FiSettings } from "react-icons/fi";
+import ManageLabels from "../Components/ManageLabels"
 
 //import OpenNewEditor from '../Pages/Notes';
 
@@ -19,17 +21,11 @@ export default function SideBar() {
     const [isPopupOpen, setPopupState] = useState(false)
     const [labelsList, setLabelsList] = useState([])
     const [showLabel, setShowLabel] = useState(false)
+    const [addNewLabelPopup,setAddNewLabelPopup] = useState(false)
 
     useEffect(() => {
         LabelService.getAllLabels().then(res => {
             setLabelsList(res)
-            // console.log(res);
-            // if(!params.id){
-            //    params.id = res[0].id;
-            // }
-            // setLabelId(params.id)
-            // setShowNotes(true);
-
         })
     }, []);
 
@@ -55,6 +51,11 @@ export default function SideBar() {
             icon: <BsTrash />
         }
     ]
+
+    const labelSettings = {
+        icon : labelsList.length >0 ? <FiSettings/> : <RiAddLine />,
+        message : labelsList.length >0 ? "Manage Labels" : "Create New Label"
+    }
 
     const newEditor = () => {
         setPopupState(true)
@@ -83,7 +84,7 @@ export default function SideBar() {
                     {
                         sideBarItems.map((item, index) => (
                             <>
-                                <div key={index} className="row"
+                                <div key={index} className="menu-row"
                                     id={path.startsWith(item.route) ? "active" : ""}
                                     onClick={() => handleClick(item.route, item.subMenu)}>
                                     <div id="icon">{item.icon}</div>
@@ -92,19 +93,25 @@ export default function SideBar() {
                                 </div>
                                
                                     {(item.subMenu && item.subMenu.subMenuStateVariable) ? item.subMenu.subList.map((subItem, index) => (
-                                        <div  key={index} className="row" onClick={() => handleLabelClick(item.subMenu.route,subItem.id)}>
+                                        <div  key={index} className="submenu-row menu-row" onClick={() => handleLabelClick(item.subMenu.route,subItem.id)}>
                                             <div id="icon">{item.subMenu.subMenuIcon}</div>
                                     <div id="title">{subItem.labelName}</div></div>
                                     )) : ""}
+                                    {item.name == "Labels" && item.subMenu.subMenuStateVariable?  <div  className="submenu-row menu-row" onClick={()=> setAddNewLabelPopup(true)}>
+                                            <div id="icon">{labelSettings.icon}</div>
+                                    <div id="title">{labelSettings.message}</div></div> : ""}
                                
                             </>
                         )
                         )
                     }
                 </ul>
+                { addNewLabelPopup ? (
+                labelsList.length >0 ? <ManageLabels labels={labelsList} onClose={()=> setAddNewLabelPopup(false)}/> :
+                <AddNewLabelPopup labelsList ={labelsList} onClose={()=> setAddNewLabelPopup(false)}></AddNewLabelPopup>) : ""}
             </div>
             {
-                (isPopupOpen) ? <NotesEditor notesDetails={{ title: "", content: "" }} onClose={() => setPopupState(false)}></NotesEditor> : <div></div>
+                (isPopupOpen) ? <NotesEditor notesDetails={{ title: "", content: "" }} onClose={() => setAddNewLabelPopup(false)}></NotesEditor> : <div></div>
             }
         </>
     )

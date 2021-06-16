@@ -76,3 +76,124 @@
   }
 
   /* Manage labels popup */
+
+  .managelabel-container{
+    background-color: white;
+    position: absolute;
+    left:25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    width: 500px;
+    height:500px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popup-header{
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+  }
+
+.popup-header h4{
+    margin: 15px;
+}
+
+.popup-body{
+    height: 90%;
+}
+
+.labels-list{
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.labels-list-container-in-popup{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.label-item-inpopup{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+}
+.label-item-inpopup:hover{
+    /* background-color: #cecece; */
+   color : #2fa6ea
+}
+
+.right-items{
+    display: flex;
+}
+
+.right-items .icon{
+   margin-right: 10px;
+   margin-left: 10px;
+   cursor: pointer;
+}
+
+.left-items{
+    display: flex;
+    justify-self: flex-end;
+    align-items: flex-end;
+   align-content: flex-end;
+   justify-self: flex-end;
+}
+
+.left-items .icon{
+    margin-right: 10px;
+   margin-left: 10px;
+    cursor: pointer;
+}
+
+.left-items .icon:hover{
+  color: #0a78b8
+}
+
+
+.addlabel-popup{
+    display: flex;
+    height: 10%;
+    /* border-top: 1px solid #adadad; */
+}
+
+.addlabel-popup input{
+    width: 80%;
+    border: 0px;
+    height: fit-content;
+    margin: auto;
+    font-size: medium;
+}
+.addlabel-popup input:focus{
+    outline: none;
+}
+
+.label-icon-footer{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 10%;
+}
+.add-label-icon{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+    align-self: center;
+    cursor: pointer;
+}
+
+
+
+
+
+
+  /* Manage labels popup */

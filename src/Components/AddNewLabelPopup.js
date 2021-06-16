@@ -3,20 +3,22 @@ import { useState } from 'react'
 import LabelService from "../Services/LabelService"
 import { GrClose } from "react-icons/gr";
 import "../css/LabelsPopups.css"
+import { createPortal } from "react-dom";
 
-function AddNewLabelPopup({ props, onClose }) {
+function AddNewLabelPopup({ props, labelsList,onClose }) {
     const[labelName,setLableName] = useState(props ? props.labelName : "")
-    const header = props ? "Edit Label" : "Add a new label";
+    const header = "Add a new label";
     
     const addLabel = () => {
         var label = {"labelName" : labelName}
         LabelService.addLabel(label).then(
             function(res) {
-                onClose();
+                labelsList.push(label)
+                onClose(label);
             }
         )
     }
-    return (
+    return createPortal(
         <>
         <div className="addlabel-overlay">
         <div className="add-label-container">
@@ -32,7 +34,7 @@ function AddNewLabelPopup({ props, onClose }) {
             </div>
         </div>
         </div>
-        </>
+        </>,document.body
     )
 }
 
