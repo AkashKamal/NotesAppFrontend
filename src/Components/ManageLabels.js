@@ -18,12 +18,13 @@ function ManageLabels({ labels, onClose }) {
             function(res) {
                 labels.push(label)
                setLabelsList(labels)
+               setNewLabelName("")
             }
         )
     }
     useEffect(() => {
         
-    }, [])
+    }, [labelsList])
 
     return createPortal(
         <>
@@ -51,7 +52,7 @@ function ManageLabels({ labels, onClose }) {
                         </div>
                         <div className="addlabel-popup">
                             <div className="label-icon-footer"><BiLabel size="25" /></div>
-                            <input type="text" placeholder="Add new label"  onChange={e => setNewLabelName( e.target.value)}></input>
+                            <input type="text" placeholder="Add new label" value={newLabelName} onChange={e => setNewLabelName( e.target.value)}></input>
                             <div className="add-label-icon"><RiAddLine size="35" onClick={()=>addLabel()} /></div>
                         </div>
                     </div>
