@@ -5,12 +5,15 @@ import { GrClose } from "react-icons/gr";
 import { RiAddLine } from "react-icons/ri";
 import { FiEdit ,FiDelete} from "react-icons/fi";
 import LabelService from "../Services/LabelService"
+import DeletePopup from "./DeletePopup"
 import "../css/LabelsPopups.css"
 
 function ManageLabels({ labels, onClose }) {
 
     const [labelsList, setLabelsList] = useState(labels)
     const [newLabelName, setNewLabelName] = useState()
+    const [isDeletePopup, setIsDeletePopup] = useState(false);
+    const[focusedLabelIndex, setFocusLabelIndex] = useState()
 
     const addLabel = () => {
         var label = {"labelName" : newLabelName}
@@ -21,6 +24,21 @@ function ManageLabels({ labels, onClose }) {
                setNewLabelName("")
             }
         )
+    }
+
+    
+
+    const deleteLabel =() => {
+        let curLabel = labelsList[focusedLabelIndex];
+        console.log(curLabel)
+       LabelService.deleteLabel(curLabel.id).then(
+        function(res) {
+           labels.splice(focusedLabelIndex,1)
+           setLabelsList(labels)
+           setFocusLabelIndex();
+           setIsDeletePopup(false)
+        }
+    )
     }
     useEffect(() => {
         
@@ -45,7 +63,7 @@ function ManageLabels({ labels, onClose }) {
                                     </div>
                                     <div className="left-items">
                                     <div className="icon"><FiEdit size="20"/></div>
-                                    <div className="icon"> <FiDelete size="20"/></div>
+                                    <div className="icon"> <FiDelete size="20" onClick={()=>{setFocusLabelIndex(index);setIsDeletePopup(true)}}/></div>
                                     </div>
                                 </ul>
                             ))}
@@ -58,6 +76,7 @@ function ManageLabels({ labels, onClose }) {
                     </div>
                 </div>
             </div>
+            {(isDeletePopup) ? <DeletePopup props={"Are you sure you want to delete this Label?"} deleteAction={() => deleteLabel()} onClose={() => setIsDeletePopup(false)}></DeletePopup> : ""}
         </>, document.body
     )
 }
